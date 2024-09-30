@@ -3,11 +3,11 @@ set $term kitty
 
 # system font
 # font pango: SF Pro Display 10
-font pango: LiterationMono Nerd Font 10
+font pango: JetBrainsMono NFM 10
 
 # external monitor scale 1.25x
-output HDMI-A-1 scale 1.25
-output eDP-1 scale 1.75
+output HDMI-A-1 scale 1.50
+output eDP-0 scale 1.75
 
 ### Variables
 # Super key. Use Mod1 for Alt.
@@ -22,9 +22,9 @@ set $right l
 # app launcher
 set $menu "rofi -combi-modi window,drun,run -show combi -show-icons"
 bindsym Mod1+space exec "rofi -show filebrowser -show-icons"
-set $wall "~/Downloads/forest.jpg"
-
+set $wall "/home/evilcorp/Downloads/walls/Cloudsnight.jpg"
 output * bg $wall fill
+# output * bg #000000 solid_color # black
 
 default_border pixel 0
 # smart_borders gaps
@@ -221,19 +221,21 @@ bindsym $mod+Shift+m exec wlr-randr --output eDP-1 --on
 # obsidian
 bindsym $mod+Shift+o exec flatpak run --socket=wayland md.obsidian.Obsidian -enable-features=UseOzonePlatform -ozone-platform=wayland
 # bindsym $mod+Shift+o exec OBSIDIAN_USE_WAYLAND=1 ./Obsidian-1.5.3.AppImage -enable-features=UseOzonePlatform -ozone-platform=wayland
-bindsym $mod+Shift+b exec "flatpak run --socket=wayland org.mozilla.firefox"
+# bindsym $mod+Shift+b exec "flatpak run --socket=wayland org.mozilla.firefox"
+bindsym $mod+Shift+b exec "flatpak run com.microsoft.Edge --ozone-platform=wayland"
+
 
 # Telegram
 bindsym $mod+Shift+t exec "~/./Apps/Telegram"
 
 # lock
-set $lock_bg ~/Downloads/walls/fedora.jpg
+set $lock_bg /home/evilcorp/Downloads/walls/gautam-arora-ncHASW6Lx4A-unsplash.jpg
 bindsym $mod+o exec swaylock -i $lock_bg
 
 # sleep, suspend and resume
 exec swayidle -w \
-        timeout 600 'swaylock -f -c 000000 -i $lock_bg' \
-        timeout 900 'swaymsg "output * dpms off"' \
+        timeout 300 'swaylock -f -c 000000 -i $lock_bg' \
+        timeout 300 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f -c 000000 -i $lock_bg' \
 

@@ -1,7 +1,6 @@
 return {
-  -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
-  -- See `:help lualine.txt`
+  event = "VeryLazy",
   opts = {
     options = {
       icons_enabled = false,
@@ -14,7 +13,15 @@ return {
       },
       lualine_b = { 'filename', 'branch' },
       lualine_c = { 'fileformat' },
-      lualine_x = {},
+      lualine_x = {
+        {
+          function()
+              local reg = vim.fn.reg_recording()
+              if reg == "" then return "no-macro" end -- not recording
+              return "recording to " .. reg
+          end,
+        },
+      },
       lualine_y = { 'filetype', 'progress' },
       lualine_z = {
         { 'location', separator = { right = '' } },

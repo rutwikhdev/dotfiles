@@ -7,6 +7,8 @@
 
 return {
   'nvim-telescope/telescope.nvim',
+  event = "VeryLazy",
+  cmd = "Telescope",
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -27,12 +29,15 @@ return {
 
     require('telescope').setup {
       defaults = {
-        layout_strategy = 'vertical',
+        -- layout_strategy = 'vertical',
         layout_config = {
-          prompt_position = 'top',
-          preview_cutoff = 20,
-          height = 0.98,
-          width = 0.98,
+          -- prompt_position = 'top',
+          -- preview_cutoff = 20,
+          -- height = 0.98,
+          -- width = 8,
+
+          -- preview_cutoff = 80,
+          -- height = 0.6,
         },
         mappings = {
           i = {

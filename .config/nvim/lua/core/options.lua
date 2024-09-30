@@ -14,7 +14,7 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 
 -- Always have at least 15 lines visible top and bottom
 vim.o.scrolloff = 15
@@ -44,6 +44,9 @@ vim.o.termguicolors = true
 -- Hide commandline below lualine
 vim.o.ch = 0
 
+-- Don't open [No Name] buffer on startup in directory
+vim.o.hidden = 0
+
 -- Alternate escape
 vim.keymap.set('i', 'kj', '<Esc>')
 
@@ -51,5 +54,6 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
 
 
-vim.g.gruvbox_material_background = 'hard'
-
+-- vim.g.gruvbox_material_background = 'hard'
+vim.g.gruvbox_flat_style = "hard"
+vim.g.tender_italic = 1
