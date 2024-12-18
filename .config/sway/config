@@ -6,7 +6,7 @@ set $term kitty
 font pango: JetBrainsMono NFM 10
 
 # external monitor scale 1.25x
-output HDMI-A-1 scale 1.50
+output HDMI-A-1 scale 1.25
 output eDP-0 scale 1.75
 
 ### Variables
@@ -22,14 +22,14 @@ set $right l
 # app launcher
 set $menu "rofi -combi-modi window,drun,run -show combi -show-icons"
 bindsym Mod1+space exec "rofi -show filebrowser -show-icons"
-set $wall "/home/evilcorp/Downloads/walls/Cloudsnight.jpg"
+set $wall "/home/evilcorp/Downloads/walls/blacknwhite.jpeg"
 output * bg $wall fill
 # output * bg #000000 solid_color # black
 
-default_border pixel 0
+default_border pixel 2
 # smart_borders gaps
-hide_edge_borders none
-for_window [class="^.*"] border pixel 0
+# hide_edge_borders none
+# for_window [class="^.*"] border pixel 0
 
 
 set $gnome-schema org.gnome.desktop.interface
