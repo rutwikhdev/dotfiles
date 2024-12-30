@@ -99,13 +99,18 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" 
 -- open quickfixlist
 vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- highlight groups for indentation
+-- vim.cmd.highlight('IndentLine guifg=#3c3836')
+-- vim.cmd.highlight('IndentLineCurrent guifg=#a9b665')
+vim.cmd.highlight('IndentLine guifg=#504945')
+vim.cmd.highlight('IndentLineCurrent guifg=#689d6a')
 
 
 -- Sec: Plugins 
 -- Setup lazy.nvim
 require("lazy").setup({
     -- colorscheme that will be used when installing plugins.
-    install = { colorscheme = { "substrata" } },
+    install = { colorscheme = { "gruvbox-baby" } },
     performance = {
         rtp = {
             disabled_plugins = {
@@ -225,10 +230,8 @@ require("lazy").setup({
 
     -- Visual indentation guide
     {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        event = "BufRead",
-        opts = {},
+        "nvimdev/indentmini.nvim",
+        opts = {}
     },
 
     -- Detech tabstop and shiftwidth automatically
@@ -625,55 +628,22 @@ require("lazy").setup({
         end
     },
     {
-        'ribru17/bamboo.nvim',
-        lazy = true,
+        "luisiacc/gruvbox-baby",
+        lazy = false,
         priority = 1000,
-        config = function()
-            -- require('bamboo').setup {
-            --   -- optional configuration here
-            -- }
-            -- require('bamboo').load()
-            -- vim.cmd[[colorscheme bamboo]]
+        config = function() 
+            vim.g.gruvbox_baby_telescope_theme = 1
+            vim.cmd.colorscheme('gruvbox-baby') 
         end,
     },
     {
-        "gmr458/vscode_modern_theme.nvim",
-        lazy = true,
-        priority = 1000,
-        -- config = function() vim.cmd.colorscheme("vscode_modern") end,
-    },
-    {
-        "folke/tokyonight.nvim",
-        lazy = true,
-        priority = 1000,
-        opts = {},
-        -- config = function() vim.cmd[[colorscheme tokyonight-night]] end
-    },
-    {
-        "catppuccin/nvim",
-        lazy = true,
-        priority = 1000,
-        config = function()
-            -- vim.cmd.colorscheme("catppuccin")
-        end
-    },
-    {
-        "gmr458/cold.nvim",
-        lazy = true,
-        priority = 1000,
-        opts = {},
-        config = function()
-            vim.cmd.colorscheme("cold")
-        end
-    },
-    {
         "kvrohit/substrata.nvim",
-        lazy = false,
+        lazy = true,
         priority = 1000,
         opts = {
             substrata_italic_comments = true
         },
-        config = function() vim.cmd.colorscheme("substrata") end
+        -- config = function() vim.cmd.colorscheme("substrata") end
     },
 
 })
