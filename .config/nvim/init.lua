@@ -68,6 +68,10 @@ vim.o.ch = 0
 -- Alternate escape
 vim.keymap.set('i', 'kj', '<Esc>')
 
+-- don't load netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Assembly syntax highlighting
 vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
 
@@ -100,17 +104,15 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" 
 vim.keymap.set('n', '<leader>l', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- highlight groups for indentation
--- vim.cmd.highlight('IndentLine guifg=#3c3836')
--- vim.cmd.highlight('IndentLineCurrent guifg=#a9b665')
-vim.cmd.highlight('IndentLine guifg=#504945')
-vim.cmd.highlight('IndentLineCurrent guifg=#689d6a')
+-- vim.cmd.highlight('IndentLine guifg=#504945')
+-- vim.cmd.highlight('IndentLineCurrent guifg=#689d6a')
 
 
 -- Sec: Plugins 
 -- Setup lazy.nvim
 require("lazy").setup({
     -- colorscheme that will be used when installing plugins.
-    install = { colorscheme = { "gruvbox-baby" } },
+    install = { colorscheme = { "tokyonight" } },
     performance = {
         rtp = {
             disabled_plugins = {
@@ -137,14 +139,6 @@ require("lazy").setup({
         event = 'InsertEnter',
         opts = {},
     },
-
-    -- mini.nvim
-    -- {
-    --     "echasnovski/mini.nvim",
-    --     config = function()
-    --         require("mini.statusline").setup({})
-    --     end,
-    -- },
 
     -- Automatic opening and closing html tags
     {
@@ -229,9 +223,64 @@ require("lazy").setup({
     },
 
     -- Visual indentation guide
-    {
-        "nvimdev/indentmini.nvim",
-        opts = {}
+    -- {
+    --     "nvimdev/indentmini.nvim",
+    --     opts = {}
+    -- },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     main = "ibl",
+    --     ---@module "ibl"
+    --     ---@type ibl.config
+    --     opts = {},
+    -- },
+    { 
+        'echasnovski/mini.indentscope',
+        version = '*',
+        opts = {
+          draw = {
+            -- Delay (in ms) between event and start of drawing scope indicator
+            delay = 200,
+
+            -- Animation rule for scope's first drawing. A function which, given
+            -- next and total step numbers, returns wait time (in ms). See
+            -- |MiniIndentscope.gen_animation| for builtin options. To disable
+            -- animation, use `require('mini.indentscope').gen_animation.none()`.
+
+            -- Symbol priority. Increase to display on top of more symbols.
+            priority = 2,
+          },
+
+          -- Module mappings. Use `''` (empty string) to disable one.
+          mappings = {
+            -- Textobjects
+            object_scope = 'ii',
+            object_scope_with_border = 'ai',
+
+            -- Motions (jump to respective border line; if not present - body line)
+            goto_top = '[i',
+            goto_bottom = ']i',
+          },
+
+          -- Options which control scope computation
+          options = {
+            -- Type of scope's border: which line(s) with smaller indent to
+            -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
+            border = 'both',
+
+            -- Whether to use cursor column when computing reference indent.
+            -- Useful to see incremental scopes with horizontal cursor movements.
+            indent_at_cursor = true,
+
+            -- Whether to first check input line to be a border of adjacent scope.
+            -- Use it if you want to place cursor on function header to get scope of
+            -- its body.
+            try_as_border = false,
+          },
+
+          -- Which character to use for drawing scope indicator
+          symbol = '│',
+        }
     },
 
     -- Detech tabstop and shiftwidth automatically
@@ -306,7 +355,7 @@ require("lazy").setup({
                     width = 40,
                 },
                 filesystem = {
-                    hijack_netrw_behavior = "open_current",
+                    hijack_netrw_behavior = "open_default",
                 }
             }
         end,
@@ -629,11 +678,11 @@ require("lazy").setup({
     },
     {
         "luisiacc/gruvbox-baby",
-        lazy = false,
+        lazy = true,
         priority = 1000,
         config = function() 
-            vim.g.gruvbox_baby_telescope_theme = 1
-            vim.cmd.colorscheme('gruvbox-baby') 
+            -- vim.g.gruvbox_baby_telescope_theme = 1
+            -- vim.cmd.colorscheme('gruvbox-baby') 
         end,
     },
     {
@@ -645,6 +694,13 @@ require("lazy").setup({
         },
         -- config = function() vim.cmd.colorscheme("substrata") end
     },
+    {
+        "Shatur/neovim-ayu",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function() vim.cmd.colorscheme("ayu-mirage") end,
+    }
 
 })
 

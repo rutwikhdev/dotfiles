@@ -6,8 +6,8 @@ set $term kitty
 font pango: JetBrainsMono NFM 10
 
 # external monitor scale 1.25x
-output HDMI-A-1 scale 1.25
-output eDP-0 scale 1.75
+output HDMI-A-1 scale 1.50
+output eDP-1 scale 1.75
 
 ### Variables
 # Super key. Use Mod1 for Alt.
@@ -22,7 +22,7 @@ set $right l
 # app launcher
 set $menu "rofi -combi-modi window,drun,run -show combi -show-icons"
 bindsym Mod1+space exec "rofi -show filebrowser -show-icons"
-set $wall "/home/evilcorp/Downloads/walls/blacknwhite.jpeg"
+set $wall "/home/sentient/Downloads/gruv-material.png"
 output * bg $wall fill
 # output * bg #000000 solid_color # black
 
@@ -242,8 +242,21 @@ exec swayidle -w \
 for_window [app_id="firefox"] inhibit_idle fullscreen
 
 
+# bar {
+#     swaybar_command waybar
+# }
 bar {
-    swaybar_command waybar
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
 
 # focud window color - change first two
