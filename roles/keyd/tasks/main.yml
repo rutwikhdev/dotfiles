@@ -1,0 +1,14 @@
+- name: Install keyd keyboard mapper from source
+  become: no
+  shell: |
+    if [ ! -d "/etc/keyd" ]; then
+      git clone https://github.com/rvaiya/keyd
+      cd keyd
+      make && sudo make install
+      sudo systemctl enable keyd --now
+    fi
+
+- name: Copy keyd config
+  become: yes
+  shell: |
+    cp -r 

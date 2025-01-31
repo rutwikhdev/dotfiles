@@ -1,0 +1,64 @@
+# Arch deps
+- name: Ensure zsh and git is installed on Arch
+  community.general.pacman:
+    name: 
+      - zsh
+      - git
+    state: present
+  when: ansible_distribution == "Archlinux"
+
+# Ubuntu deps
+- name: Ensure zsh and git is installed on Ubuntu
+  ansible.builtin.apt:
+    name: 
+      - zsh
+      - git
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Download and Install Oh My Zsh
+  become: no
+  shell: |
+    # Check if Oh My Zsh is already installed
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+  args:
+    creates: "{{ ansible_user_dir }}/.oh-my-zsh"
+
+- name: Set Zsh as the default shell
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+  when: ansible_user_shell != '/bin/zsh'
+
+- name: Check if plugins line exists in .zshrc
+  shell: grep -q '^plugins=(git)$' {{ ansible_user_dir }}/.zshrc
+  register: plugins_line_exists
+  ignore_errors: yes
+
+- name: Add zsh-autosuggestion
+  become: no
+  shell: |
+    if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    fi
+  args:
+    creates: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+- name: Replace plugins line in .zshrc with custom plugins
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.zshrc"
+    regexp: '^plugins=\(.*\)$'
+    line: |
+      plugins=(
+        git
+        zsh-autosuggestions
+      )
+  when: plugins_line_exists.rc == 0
+
+- name: Source .zshrc to apply changes
+  shell: source {{ ansible_user_dir }}/.zshrc
+  become: no
+

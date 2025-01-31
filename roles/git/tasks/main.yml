@@ -1,0 +1,8 @@
+- name: Setup github user.name
+  shell: git config --global user.name "rutwikhdev"
+  become: no
+
+- name: Setup github user.email
+  shell: git config --global user.email "rutwikhdev@gmail.com"
+  become: no
+

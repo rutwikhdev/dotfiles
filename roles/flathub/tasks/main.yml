@@ -1,0 +1,13 @@
+- name: Install flatpak and apps from flathub
+  shell: |
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Obsidian from flatpak
+  shell: |
+    flatpak install flathub md.obsidian.Obsidian
+
+- name: Enable wayland support for obsidian
+  shell: |
+    flatpak override --user --socket=wayland md.obsidian.Obsidian
+  when: ansible_env["XDG_BACKEND"] == "wayland"

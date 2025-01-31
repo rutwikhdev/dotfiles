@@ -1,0 +1,74 @@
+# ubuntu
+- name: Install packages with apt if not installed
+  become: yes
+  ansible.builtin.apt:
+    name:
+      - git
+      - tmux
+      - neovim
+      - ansible
+      - kitty
+      - fastfetch
+      - unzip
+      - curl
+      - wget
+      - fzf
+      - ripgrep
+      - zsh
+      - go
+      - xclip
+      - wl-clipboard
+      - npm
+      - flatpak
+  when: ansible_distribution == "Ubuntu"
+
+# arch
+- name: Get a list of installed packages
+  become: yes
+  command: pacman -Q
+  register: pacman_installed
+  changed_when: false
+  failed_when: false
+
+- name: Install packages with pacman if not installed
+  become: yes
+  community.general.pacman:
+    name: "{{ item }}"
+    state: present
+  when: "item | string not in pacman_installed.stdout and ansible_distribution == 'Archlinux'"
+  loop:
+    - hyprland
+    - hyprpaper
+    - waybar
+    - git
+    - tmux
+    - neovim
+    - ansible
+    - kitty
+    - rofi-wayland
+    - fastfetch
+    - unzip
+    - curl
+    - wget
+    - fzf
+    - ripgrep
+    - zsh
+    - go
+    - wl-clipboard
+    - npm
+    - flatpak
+    - zathura
+    - zathura-pdf-poppler
+    - thunar
+    - gvfs
+    - udisks2
+    - bluez
+    - bluez-utils
+    - blueman
+    - imv
+    - mpv
+    - networkmanager
+    - brightnessctl
+    - chromium
+    - pacman-contrib
+    - noto-fonts-emoji

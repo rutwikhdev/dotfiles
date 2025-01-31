@@ -1,0 +1,9 @@
+- name: Bootstrap dotfile setup
+  hosts: localhost
+  
+  roles:
+    - essentials
+    - zsh
+    - git
+    - flathub
+    # - keyd

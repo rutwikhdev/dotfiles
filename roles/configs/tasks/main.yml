@@ -1,0 +1,8 @@
+- name: Add zsh-autosuggestion
+  become: no
+  shell: |
+    if [ ! -d "$HOME/dotfiles" ]; then
+      git clone https://github.com/rutwikhdev/dotfiles ${HOME}/dotfiles
+    fi
+  args:
+    creates: "{{ ansible_user_dir }}/dotfiles"
