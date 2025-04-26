@@ -1,0 +1,22 @@
+configuration{
+    modi: "run,drun,window";
+    icon-theme: "Oranchelo";
+    show-icons: false;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+	matching: "normal";
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-window: " 󰕰  Window";
+    display-Network: " 󰤨  Network";
+    sidebar-mode: true;
+	kb-accept-entry: "KP_Enter,Return";
+	kb-remove-to-eol: "";
+	kb-row-up: "Control+k";
+	kb-row-down: "Control+j";
+}
+
+@theme "~/.config/rofi/minimaldark.rasi"

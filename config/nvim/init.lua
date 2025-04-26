@@ -25,7 +25,7 @@ vim.o.autoread = true
 
 -- Disable hlsearch after pressing Esc in normal mode
 -- vim.o.hlsearch = false
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR><CR>')
 
 -- Make line numbers default
 vim.wo.number = true
@@ -66,7 +66,7 @@ vim.o.termguicolors = true
 vim.o.ch = 0
 
 -- Alternate escape
-vim.keymap.set('i', 'kj', '<Esc>')
+-- vim.keymap.set('i', 'kj', '<Esc>')
 
 -- don't load netrw
 vim.g.loaded_netrw = 1
@@ -74,7 +74,7 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Assembly syntax highlighting
 vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
-
+-- vim.cmd.colorscheme("retrobox")
 
 -- Sec: Keymaps 
 -- Keymaps for better default experience
@@ -227,61 +227,61 @@ require("lazy").setup({
     --     "nvimdev/indentmini.nvim",
     --     opts = {}
     -- },
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     main = "ibl",
-    --     ---@module "ibl"
-    --     ---@type ibl.config
-    --     opts = {},
-    -- },
-    { 
-        'echasnovski/mini.indentscope',
-        version = '*',
-        opts = {
-          draw = {
-            -- Delay (in ms) between event and start of drawing scope indicator
-            delay = 200,
-
-            -- Animation rule for scope's first drawing. A function which, given
-            -- next and total step numbers, returns wait time (in ms). See
-            -- |MiniIndentscope.gen_animation| for builtin options. To disable
-            -- animation, use `require('mini.indentscope').gen_animation.none()`.
-
-            -- Symbol priority. Increase to display on top of more symbols.
-            priority = 2,
-          },
-
-          -- Module mappings. Use `''` (empty string) to disable one.
-          mappings = {
-            -- Textobjects
-            object_scope = 'ii',
-            object_scope_with_border = 'ai',
-
-            -- Motions (jump to respective border line; if not present - body line)
-            goto_top = '[i',
-            goto_bottom = ']i',
-          },
-
-          -- Options which control scope computation
-          options = {
-            -- Type of scope's border: which line(s) with smaller indent to
-            -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
-            border = 'both',
-
-            -- Whether to use cursor column when computing reference indent.
-            -- Useful to see incremental scopes with horizontal cursor movements.
-            indent_at_cursor = true,
-
-            -- Whether to first check input line to be a border of adjacent scope.
-            -- Use it if you want to place cursor on function header to get scope of
-            -- its body.
-            try_as_border = false,
-          },
-
-          -- Which character to use for drawing scope indicator
-          symbol = '│',
-        }
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        ---@module "ibl"
+        ---@type ibl.config
+        opts = {},
     },
+    -- { 
+    --     'echasnovski/mini.indentscope',
+    --     version = '*',
+    --     opts = {
+    --       draw = {
+    --         -- Delay (in ms) between event and start of drawing scope indicator
+    --         delay = 0,
+    --
+    --         -- Animation rule for scope's first drawing. A function which, given
+    --         -- next and total step numbers, returns wait time (in ms). See
+    --         -- |MiniIndentscope.gen_animation| for builtin options. To disable
+    --         -- animation, use `require('mini.indentscope').gen_animation.none()`.
+    --
+    --         -- Symbol priority. Increase to display on top of more symbols.
+    --         priority = 2,
+    --       },
+    --
+    --       -- Module mappings. Use `''` (empty string) to disable one.
+    --       mappings = {
+    --         -- Textobjects
+    --         object_scope = 'ii',
+    --         object_scope_with_border = 'ai',
+    --
+    --         -- Motions (jump to respective border line; if not present - body line)
+    --         goto_top = '[i',
+    --         goto_bottom = ']i',
+    --       },
+    --
+    --       -- Options which control scope computation
+    --       options = {
+    --         -- Type of scope's border: which line(s) with smaller indent to
+    --         -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
+    --         border = 'both',
+    --
+    --         -- Whether to use cursor column when computing reference indent.
+    --         -- Useful to see incremental scopes with horizontal cursor movements.
+    --         indent_at_cursor = true,
+    --
+    --         -- Whether to first check input line to be a border of adjacent scope.
+    --         -- Use it if you want to place cursor on function header to get scope of
+    --         -- its body.
+    --         try_as_border = false,
+    --       },
+    --
+    --       -- Which character to use for drawing scope indicator
+    --       symbol = '│',
+    --     }
+    -- },
 
     -- Detech tabstop and shiftwidth automatically
     {
@@ -290,7 +290,7 @@ require("lazy").setup({
         opts = {
             max_lines = 2048,
             -- Space indentations that should be detected
-            standard_widths = { 2, 4, 6 },
+            standard_widths = { 2, 4, 8 },
             -- Skip multi-line comments and strings (more accurate detection but less performant)
             skip_multiline = true,
         },
@@ -318,11 +318,13 @@ require("lazy").setup({
                     "diagnostics",
                     "filetype_lsp",
                     "progress"
+                },
+                configs = {
+                    recording = {
+                        icon = ' recording:'
+                    },
                 }
             },
-            icons = {
-                recording = ' recording:',
-            }
         }
     },
 
@@ -351,7 +353,7 @@ require("lazy").setup({
         config = function()
             require('neo-tree').setup {
                 window = {
-                    position = 'left',
+                    position = 'right',
                     width = 40,
                 },
                 filesystem = {
@@ -646,6 +648,7 @@ require("lazy").setup({
                 },
                 ts_ls = {},
                 gopls = {},
+                cmake = {},
             }
 
             local mason_lspconfig = require 'mason-lspconfig'
@@ -670,20 +673,11 @@ require("lazy").setup({
     -- Colorschemes
     {
         "Mofiqul/dracula.nvim",
-        lazy = true,
+        lazy = false,
         priority = 1000,
         init = function()
-            -- vim.cmd[[colorscheme dracula-soft]]
+            vim.cmd[[colorscheme dracula-soft]]
         end
-    },
-    {
-        "luisiacc/gruvbox-baby",
-        lazy = true,
-        priority = 1000,
-        config = function() 
-            -- vim.g.gruvbox_baby_telescope_theme = 1
-            -- vim.cmd.colorscheme('gruvbox-baby') 
-        end,
     },
     {
         "kvrohit/substrata.nvim",
@@ -695,12 +689,89 @@ require("lazy").setup({
         -- config = function() vim.cmd.colorscheme("substrata") end
     },
     {
-        "Shatur/neovim-ayu",
-        lazy = false,
+        "folke/tokyonight.nvim",
+        lazy = true,
         priority = 1000,
         opts = {},
-        config = function() vim.cmd.colorscheme("ayu-mirage") end,
-    }
+        -- config = function() vim.cmd.colorscheme("tokyonight-night") end,
+    },
+    {
+        "catppuccin/nvim",
+        lazy = true,
+        priority = 1000,
+        opts = {},
+        -- config = function() vim.cmd.colorscheme("catppuccin-macchiato") end,
+    },
+    {
+        "gbprod/nord.nvim",
+        lazy = true,
+        priority = 1000,
+        opts = {},
+        -- config = function() vim.cmd.colorscheme("nord") end,
+    },
+    {
+        "askfiy/visual_studio_code",
+        lazy = true,
+        priority = 100,
+        -- config = function() vim.cmd.colorscheme("visual_studio_code")end,
+    },
+    {
+      "blazkowolf/gruber-darker.nvim",
+      opts = {
+        bold = false,
+        italic = {
+          strings = false,
+        },
+      },
+    },
+
+    -- {
+    --     "Isrothy/neominimap.nvim",
+    --   version = "v3.x.x",
+    --   lazy = false, -- NOTE: NO NEED to Lazy load
+    --   -- Optional. You can alse set your own keybindings
+    --   keys = {
+    --     -- Global Minimap Controls
+    --     { "<leader>nm", "<cmd>Neominimap toggle<cr>", desc = "Toggle global minimap" },
+    --     { "<leader>no", "<cmd>Neominimap on<cr>", desc = "Enable global minimap" },
+    --     { "<leader>nc", "<cmd>Neominimap off<cr>", desc = "Disable global minimap" },
+    --     { "<leader>nr", "<cmd>Neominimap refresh<cr>", desc = "Refresh global minimap" },
+    --
+    --     -- Window-Specific Minimap Controls
+    --     { "<leader>nwt", "<cmd>Neominimap winToggle<cr>", desc = "Toggle minimap for current window" },
+    --     { "<leader>nwr", "<cmd>Neominimap winRefresh<cr>", desc = "Refresh minimap for current window" },
+    --     { "<leader>nwo", "<cmd>Neominimap winOn<cr>", desc = "Enable minimap for current window" },
+    --     { "<leader>nwc", "<cmd>Neominimap winOff<cr>", desc = "Disable minimap for current window" },
+    --
+    --     -- Tab-Specific Minimap Controls
+    --     { "<leader>ntt", "<cmd>Neominimap tabToggle<cr>", desc = "Toggle minimap for current tab" },
+    --     { "<leader>ntr", "<cmd>Neominimap tabRefresh<cr>", desc = "Refresh minimap for current tab" },
+    --     { "<leader>nto", "<cmd>Neominimap tabOn<cr>", desc = "Enable minimap for current tab" },
+    --     { "<leader>ntc", "<cmd>Neominimap tabOff<cr>", desc = "Disable minimap for current tab" },
+    --
+    --     -- Buffer-Specific Minimap Controls
+    --     { "<leader>nbt", "<cmd>Neominimap bufToggle<cr>", desc = "Toggle minimap for current buffer" },
+    --     { "<leader>nbr", "<cmd>Neominimap bufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+    --     { "<leader>nbo", "<cmd>Neominimap bufOn<cr>", desc = "Enable minimap for current buffer" },
+    --     { "<leader>nbc", "<cmd>Neominimap bufOff<cr>", desc = "Disable minimap for current buffer" },
+    --
+    --     ---Focus Controls
+    --     { "<leader>nf", "<cmd>Neominimap focus<cr>", desc = "Focus on minimap" },
+    --     { "<leader>nu", "<cmd>Neominimap unfocus<cr>", desc = "Unfocus minimap" },
+    --     { "<leader>ns", "<cmd>Neominimap toggleFocus<cr>", desc = "Switch focus on minimap" },
+    --   },
+    --   init = function()
+    --     -- The following options are recommended when layout == "float"
+    --     vim.opt.wrap = false
+    --     vim.opt.sidescrolloff = 36 -- Set a large value
+    --
+    --     --- Put your configuration here
+    --     ---@type Neominimap.UserConfig
+    --     vim.g.neominimap = {
+    --       auto_enable = true,
+    --     }
+    --   end,
+    -- }
 
 })
 

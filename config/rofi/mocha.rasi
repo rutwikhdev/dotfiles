@@ -8,8 +8,8 @@
     fg-col2: #f38ba8;
     grey: #6c7086;
 	
-	width: 30%;
-    font: "JetBrainsMono NFM 18";
+	width: 60%;
+    font: "JetBrainsMono NFM 28";
 }
 
 element-text, element-icon , mode-switcher {
@@ -18,7 +18,7 @@ element-text, element-icon , mode-switcher {
 }
 
 window {
-    height: 660px;
+    height: 60%;
     border: 3px;
     border-color: @border-col;
 	border-radius: 5px;

@@ -15,7 +15,7 @@
       - fzf
       - ripgrep
       - zsh
-      - go
+      - golang
       - xclip
       - wl-clipboard
       - npm

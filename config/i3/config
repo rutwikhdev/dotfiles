@@ -5,12 +5,9 @@ default_border pixel 0
 # modifier
 set $mod Mod4
 
-assign [class="kitty"] 1
-assign [class="google-Chrome"] 2
-assign [class="brave"] 3
-
 # wallpaper
-exec_always --no-startup-id "feh --bg-fill /home/evilcorp/Downloads/walls/benjamin-voros-yrwpJwDNSHE-unsplash.jpg"
+# exec_always --no-startup-id "feh --bg-fill /home/eureka/Downloads/Downloads/walls/snowymountains.jpg"
+exec_always --no-startup-id "feh --bg-fill /home/eureka/Downloads/astroring.jpg"
 
 # i3status Font
 font pango:JetBrainsMono NFM 10
@@ -22,8 +19,8 @@ exec --no-startup-id dex --autostart --environment i3
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id kitty
-bindsym Control+Return exec --no-startup-id kitty
+bindsym $mod+Return exec --no-startup-id ghostty
+bindsym Control+Return exec --no-startup-id ghostty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -174,11 +171,11 @@ bar {
 exec_always --no-startup-id "picom --config ~/.config/picom/picom.conf --experimental-backends"
 
 # Tapping enabled
-exec_always --no-startup-id xinput set-prop 13 325 1
+exec_always --no-startup-id xinput set-prop 13 326 1
 
 # Natural Scrolling
-exec_always --no-startup-id xinput set-prop 11 296 1
-exec_always --no-startup-id xinput set-prop 13 296 1
+exec_always --no-startup-id xinput set-prop 11 297 1
+exec_always --no-startup-id xinput set-prop 13 297 1
 
 # Key repeat rate
 exec_always --no-startup-id "xset r rate 200 60"

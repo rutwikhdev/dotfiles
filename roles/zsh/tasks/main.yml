@@ -34,7 +34,7 @@
   when: ansible_user_shell != '/bin/zsh'
 
 - name: Check if plugins line exists in .zshrc
-  shell: grep -q '^plugins=(git)$' {{ ansible_user_dir }}/.zshrc
+  shell: grep -q '^plugins=(git)$' ~/.zshrc
   register: plugins_line_exists
   ignore_errors: yes
 
