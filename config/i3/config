@@ -1,3 +1,5 @@
+#gaps inner 10
+
 for_window [class="firefox"] border pixel 0
 for_window [class="Brave-browser"] border pixel 0
 default_border pixel 0
@@ -7,20 +9,19 @@ set $mod Mod4
 
 # wallpaper
 # exec_always --no-startup-id "feh --bg-fill /home/eureka/Downloads/Downloads/walls/snowymountains.jpg"
-exec_always --no-startup-id "feh --bg-fill /home/eureka/Downloads/astroring.jpg"
+exec_always --no-startup-id "feh --bg-fill /home/nebula/Downloads/rw4.png"
 
 # i3status Font
 font pango:JetBrainsMono NFM 10
 
 exec --no-startup-id dex --autostart --environment i3
 
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id ghostty
-bindsym Control+Return exec --no-startup-id ghostty
+bindsym $mod+Return exec --no-startup-id kitty
+bindsym Control+Return exec --no-startup-id kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -101,6 +102,12 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+# switch using the fn keys
+bindsym F1 workspace number $ws1
+bindsym F2 workspace number $ws2
+bindsym F3 workspace number $ws3
+bindsym F4 workspace number $ws4
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -171,11 +178,12 @@ bar {
 exec_always --no-startup-id "picom --config ~/.config/picom/picom.conf --experimental-backends"
 
 # Tapping enabled
-exec_always --no-startup-id xinput set-prop 13 326 1
+exec_always --no-startup-id xinput set-prop 13 351 1
+# exec_always --no-startup-id xinput set-prop 13 351 1
 
 # Natural Scrolling
-exec_always --no-startup-id xinput set-prop 11 297 1
-exec_always --no-startup-id xinput set-prop 13 297 1
+# exec_always --no-startup-id xinput set-prop 11 297 1
+exec_always --no-startup-id xinput set-prop 13 322 1
 
 # Key repeat rate
 exec_always --no-startup-id "xset r rate 200 60"

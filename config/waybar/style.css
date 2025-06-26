@@ -1,165 +1,122 @@
-@import url("colors.css");
-
 * {
   border: none;
-  font-family: 'JetBrainsMono Nerd Font Mono', 'Symbols Nerd Font Mono';
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'CaskaydiaMono NF SemiBold', 'JetBrainsMono NFM', 'Symbols Nerd Font Mono';
   font-size: 14px;
-  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
-  min-height: 15px;
-  margin-bottom: 1px;
+  font-weight: bold;
 }
 
 window#waybar {
-  background: transparent;
+  background-color: #2E3440; /* Nord0 */
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
-window#waybar.empty #window {
-    background-color: transparent;
+window#waybar.hidden {
+  opacity: 0.5;
 }
 
-#custom-arch, #workspaces {
-  border-radius: 12px;
-  background-color: @bg-color;
-  color: @fg-color;
-  margin-top: 5px;
-  margin-right: 15px;
-  padding-top: 1px;
-  padding-left: 10px;
-  padding-right: 10px;
+#workspaces {
+  background-color: transparent;
 }
-
-#custom-arch {
-  font-size: 20px;
-  margin-left: 15px;
-  color: @fg-color;
-  /* background: linear-gradient(229deg, #19bc92, #c7a3dd, #ebf2aa, #e19788); */
-  background-size: 800% 800%;
-  animation: playing 30s ease infinite;
-}
-
 
 #workspaces button {
-  background: @bg-color;
-  color: @fg-color;
+  all: initial;
+  min-width: 0;
+  box-shadow: inset 0 -3px transparent;
+  padding: 4px 8px;
+  margin: 6px 3px;
+  border-radius: 4px;
+  background-color: #3B4252; /* Nord1 */
+  color: #ECEFF4;            /* Nord6 */
 }
 
-#custom-spotify {
-  border-radius: 10px;
-  background-color: #1DB954;
-  color: @fg-color;
-  margin-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 15px;
+#workspaces button.active {
+  color: #3B4252;            /* Nord1 */
+  background-color: #ECEFF4; /* Nord6 */
 }
 
-#window, #mpris, #tray, #memory, #clock, #backlight, #pulseaudio, #bluetooth, #network, #battery{
-  border-radius: 8px;
-  background-color: @bg-color;
-  color: @fg-color;
-  margin-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 10px;
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: #3B4252;            /* Nord1 */
+  background-color: #ECEFF4; /* Nord6 */
 }
 
+#workspaces button.urgent {
+  background-color: #BF616A; /* Nord11 */
+}
+
+#memory,
+#custom-power,
+#battery,
+#backlight,
+#pulseaudio,
+#network,
+#clock,
 #tray {
-  margin-left: 10px;
+  border-radius: 15px;
+  margin: 3px;
+  padding: 0px 8px;
+  background-color: #3B4252; /* Nord1 */
+  color: #2E3440;            /* Nord0 */
 }
 
-
-#mpris.playing {
-  border-radius: 8px;
-  color: #32302f;
-  margin-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 15px;
-
-  background: #19be99;
-  /* background: linear-gradient(229deg, #19bc92, #c7a3dd, #ebf2aa, #e19788); */
-  background-size: 800% 800%;
-
-  animation: playing 15s ease infinite;
+#custom-power {
+  margin-right: 6px;
 }
 
-@keyframes playing {
-    0%{background-position:0% 50%}
-    33%{background-position:100% 50%}
-    80%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+#memory {
+  background-color: #D08770; /* Nord12 */
 }
 
-#mpris.paused {
-  border-radius: 8px;
-  background-color: @bg-color;
-  color: @fg-color;
-  margin-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 15px;
+#battery {
+  background-color: #BF616A; /* Nord11 */
 }
 
-#backlight, #bluetooth {
-  /* border-top-right-radius: 0; */
-  /* border-bottom-right-radius: 0; */
-  padding-right: 5px;
-  margin-right: 0
+#battery.warning,
+#battery.critical,
+#battery.urgent {
+  background-color: #BF616A; /* same as Nord11 */
+  color: #EBCB8B;            /* Nord13 */
 }
 
-#bluetooth.connected {
-  color: #ffffff;
-  background-color: #085ca8;
-  /* animation: bluetooth_connected_animation 15s linear infinite; */
+#battery.charging {
+  background-color: #A3BE8C; /* Nord14 */
+  color: #2E3440;            /* Nord0 */
 }
 
-@keyframes bluetooth_connected_animation {
-  0% {
-    background-color: rgba(6,124,168,1);
-  }
-
-  50% {
-    background-color: rgba(50,62,177,0.9275911048012955);
-  }
-  100% {
-    background-color: rgba(6,124,168,1);
-  }
+#backlight {
+  background-color: #D08770; /* Nord12 */
 }
 
 #pulseaudio {
-  padding-left: 5px;
-  margin-left: 5px;
+  background-color: #EBCB8B; /* Nord13 */
 }
 
-#network.wifi {
-  /* border-top-left-radius: 0; */
-  /* border-bottom-left-radius: 0; */
-  margin-left: 5px;
-  color: #FFFFFF;
-  padding-left: 5px;
-  /* animation: network_animation 4s linear infinite; */
-}
-
-@keyframes network_animation {
-  0% {
-    background-color: #418974;
-    background-position: 0% 50%;
-  }
-
-  33% {
-    background-color: rgba(9,161,153,0.9275911048012955);
-    background-position: 100% 50%;
-  }
-  66% {
-    background-color: rgba(123,166,150,1);
-    background-position: 0% 50%;
-  }
-  100% {
-    background-color: #418974;
-    background-position: 100% 50%;
-  }
+#network {
+  background-color: #8FBCBB; /* Nord7 */
+  padding-right: 17px;
 }
 
 #clock {
-  margin-right: 0;
+  font-family: JetBrainsMono Nerd Font;
+  background-color: #B48EAD; /* Nord15 */
 }
+
+#custom-power {
+  background-color: #D8DEE9; /* Nord4 */
+}
+
+tooltip {
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #2E3440; /* Nord0 */
+}
+
+tooltip label {
+  padding: 5px;
+  background-color: #2E3440; /* Nord0 */
+}
+
