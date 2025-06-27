@@ -9,7 +9,7 @@
     grey: #6c7086;
 	
 	width: 60%;
-    font: "JetBrainsMono NFM 28";
+    font: "JetBrainsMono NFM 12";
 }
 
 element-text, element-icon , mode-switcher {

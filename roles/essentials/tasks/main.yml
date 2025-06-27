@@ -39,6 +39,14 @@
   loop:
     - hyprland
     - hyprpaper
+    - hyprshot
+    - hyprlock
+    - hyprpolkitagent
+    - xdg-desktop-portal-hyprland
+    - dunst
+    - pamixer
+    - pipewire
+    - wireplumber
     - waybar
     - git
     - tmux
@@ -62,6 +70,7 @@
     - thunar
     - gvfs
     - udisks2
+    - udiskie
     - bluez
     - bluez-utils
     - blueman

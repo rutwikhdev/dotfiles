@@ -1,3 +1,4 @@
+# TODO: Copy config/- nvim, hyprland, rofi, kitty, ghostty, waybar, zathura to .config/
 - name: Copy dotfiles
   shell: |
     cp -r 
