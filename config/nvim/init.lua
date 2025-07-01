@@ -70,8 +70,8 @@ vim.o.ch = 0
 -- vim.keymap.set('i', 'kj', '<Esc>')
 
 -- don't load netrw
---vim.g.loaded_netrw = 1
---vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Assembly syntax highlighting
 vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
@@ -304,7 +304,7 @@ require('lazy').setup {
           width = 40,
         },
         filesystem = {
-          hijack_netrw_behavior = 'open_default',
+          hijack_netrw_behavior = 'open_current',
         },
       }
     end,
