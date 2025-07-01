@@ -29,13 +29,16 @@
   register: pacman_installed
   changed_when: false
   failed_when: false
+  when: ansible_distribution == "Archlinux"
+  # when: "item | string not in pacman_installed.stdout and ansible_distribution == 'Archlinux'"
 
 - name: Install packages with pacman if not installed
   become: yes
   community.general.pacman:
     name: "{{ item }}"
     state: present
-  when: "item | string not in pacman_installed.stdout and ansible_distribution == 'Archlinux'"
+  when: ansible_distribution == "Archlinux"
+  # when: "item | string not in pacman_installed.stdout and ansible_distribution == 'Archlinux'"
   loop:
     - hyprland
     - hyprpaper
@@ -81,3 +84,35 @@
     - chromium
     - pacman-contrib
     - noto-fonts-emoji
+
+# fedora
+- name: Install packages with dnf if not installed
+  become: yes
+  ansible.builtin.dnf:
+    name:
+      - hyprland
+      - hyprpaper
+      - hyprshot
+      - hyprlock
+      - hyprpolkitagent
+      - xdg-desktop-portal-hyprland
+      - waybar
+      - dunst
+      - pamixer
+      - git
+      - tmux
+      - neovim
+      - kitty
+      - fastfetch
+      - unzip
+      - curl
+      - wget
+      - fzf
+      - ripgrep
+      - zsh
+      - golang
+      - xclip
+      - wl-clipboard
+      - npm
+      - flatpak
+  when: ansible_distribution == "Fedora"

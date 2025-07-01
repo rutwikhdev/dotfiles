@@ -1,14 +1,22 @@
+- name: Check if /etc/keyd exists
+  ansible.builtin.stat:
+    path: /etc/keyd
+  register: key_dir
+
 - name: Install keyd keyboard mapper from source
-  become: no
+  become: yes
   shell: |
-    if [ ! -d "/etc/keyd" ]; then
-      git clone https://github.com/rvaiya/keyd
-      cd keyd
-      make && sudo make install
-      sudo systemctl enable keyd --now
-    fi
+    cd /tmp
+    git clone https://github.com/rvaiya/keyd
+    cd keyd
+    make && sudo make install
+    sudo systemctl enable keyd --now
+  when: not (key_dir.stat.exists and key_dir.stat.isdir)
 
 - name: Copy keyd config
   become: yes
   shell: |
-    cp -r 
+    sudo cp ../../../config/keyd/default.conf /etc/default/keyd/
+    sudo systemctl restart keyd
+  when: key_dir.stat.exists and key_dir.stat.isdir
+
