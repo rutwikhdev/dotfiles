@@ -3,9 +3,11 @@ Dotfiles for my reproducible os/dev env setup with Hyprland
 ![image](https://github.com/user-attachments/assets/edf4b43d-3fad-4de4-8ebd-e3912421ebc9)
 
 
-### Arch/Ubuntu/Fedora
+### Installation on Arch/Ubuntu/Fedora
 ```bash
 # Install ansible using the default package manager for your distro and run,
+git clone https://github.com/rutwikhdev/dotfiles.git
+cd dotfiles
 sudo ansible-playbook main.yml --become
 ```
 
