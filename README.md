@@ -1,4 +1,7 @@
-Dotfiles for my reproducible os/dev env setup with Hyprland
+> [!WARNING]  
+> Ansible setup is still WIP and might break anytime so use at your own risk
+
+<p align="center">Dotfiles for my reproducible os/dev env setup with Hyprland</p>
 
 ![image](https://github.com/user-attachments/assets/edf4b43d-3fad-4de4-8ebd-e3912421ebc9)
 
