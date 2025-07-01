@@ -1,4 +1,15 @@
 # TODO: Copy config/- nvim, hyprland, rofi, kitty, ghostty, waybar, zathura to .config/
-- name: Copy dotfiles
-  shell: |
-    cp -r 
+- name: Ensure ~/.config exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+    mode: "0755"
+
+- name: Create symlinks for selected config directories
+  file:
+    src: "{{ ansible_env.HOME }}/dotfiles/config/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/{{ item }}"
+    state: link
+    force: yes
+  loop: "{{ config_dirs }}"
+
