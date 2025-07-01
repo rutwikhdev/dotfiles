@@ -1,4 +1,4 @@
-Dotfile configs for my reproducible os/dev env setup with Hyprland
+Dotfiles for my reproducible os/dev env setup with Hyprland
 
 ![image](https://github.com/user-attachments/assets/edf4b43d-3fad-4de4-8ebd-e3912421ebc9)
 
