@@ -2,11 +2,11 @@
   hosts: localhost
   
   roles:
-    # - essentials
-    # - zsh
+    - essentials
+    - zsh
     # - git
-    # - flathub
-    # - keyd
+    - flathub
+    - keyd
     - role: dotfiles
       vars:
         config_dirs:
