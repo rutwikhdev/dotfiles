@@ -8,35 +8,35 @@
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
-    color: #cdd6f4;
+    background: rgba(29, 32, 33, 0); /* Transparent */
+    color: #ebdbb2; /* Gruvbox Light Text */
 }
 
 #workspaces button {
     padding: 5px;
-    color: #555869;
+    color: #928374; /* Neutral gray */
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: #ebdbb2;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
-    background: #eba0ac;
+    color: #282828;
+    background: #d79921; /* Yellow */
     border-radius: 10px;
 }
 
 #workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
+    color: #1d2021;
+    background: #fb4934; /* Red */
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: #cdd6f4;
-    color: #11111b; 
+    background: #ebdbb2;
+    color: #282828;
     border-radius: 10px;
 }
 
@@ -51,11 +51,11 @@ window#waybar {
 #workspaces,
 #tray,
 #backlight {
-    background: #1e1e2e;
+    background: #3c3836;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 5px;
-    /* border: 1px solid #181825; */
+    /* border: 1px solid #282828; */
 }
 
 #backlight {
@@ -68,7 +68,7 @@ window#waybar {
 }
 
 #workspaces {
-    background: #1e1e2e;
+    background: #3c3836;
     border-radius: 10px;
     margin-left: 10px;
     padding-right: 0px;
@@ -91,26 +91,25 @@ window#waybar {
 }
 
 #clock {
-    color: #a6adc8;
-    border-radius: 10px 10px 10px 10px;
+    color: #ebdbb2;
+    border-radius: 10px;
     margin-left: 5px;
     border-right: 0px;
 }
 
 #network {
-    color:  #a6adc8;
+    color: #ebdbb2;
     border-radius: 10px 0px 0px 10px;
-
 }
 
 #pulseaudio {
-    color: #a6adc8;
+    color: #ebdbb2;
     border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio.microphone {
-    color: #a6adc8;
+    color: #ebdbb2;
     border-radius: 0px 10px 10px 0px;
     border-left: 0px;
     border-right: 0px;
@@ -118,7 +117,8 @@ window#waybar {
 }
 
 #battery {
-    color:#a6adc8;
+    color: #ebdbb2;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
+

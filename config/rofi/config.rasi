@@ -18,5 +18,5 @@ configuration{
 	kb-row-up: "Control+k";
 	kb-row-down: "Control+j";
 }
-@theme "./mocha.rasi"
+@theme "./dracula.rasi"
 

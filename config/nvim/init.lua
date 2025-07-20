@@ -16,6 +16,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Sec: Options
+vim.g.loaded_netrw = 0
+vim.g.loaded_netrwPlugin = 0
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -68,10 +71,6 @@ vim.o.ch = 0
 
 -- Alternate escape
 -- vim.keymap.set('i', 'kj', '<Esc>')
-
--- don't load netrw
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
 
 -- Assembly syntax highlighting
 vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
@@ -293,7 +292,7 @@ require('lazy').setup {
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
     },
-    event = 'VeryLazy',
+    event = 'VimEnter',
     keys = {
       { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'NeoTree' },
     },
@@ -304,7 +303,10 @@ require('lazy').setup {
           width = 40,
         },
         filesystem = {
-          hijack_netrw_behavior = 'open_current',
+          hijack_netrw_behavior = 'open_default',
+          -- window = {
+          --   position = "current"
+          -- }
         },
       }
     end,
@@ -755,13 +757,29 @@ require('lazy').setup {
           -- capabilities = {},
           settings = {
             Lua = {
-              completion = {
-                callSnippet = 'Replace',
+              runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {
+                  'vim',
+                  'require'
+                },
+              },
+              workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+              },
+              -- Do not send telemetry data containing a randomized but unique identifier
+              telemetry = {
+                enable = false,
+              },
             },
           },
+
         },
       }
 
@@ -807,31 +825,44 @@ require('lazy').setup {
     lazy = true,
     priority = 1000,
     opts = {},
-    -- config = function() vim.cmd.colorscheme("dracula-soft") end
+    config = function() vim.cmd.colorscheme("dracula-soft") end
   },
   {
     'askfiy/visual_studio_code',
     lazy = true,
     priority = 100,
-    -- config = function() vim.cmd.colorscheme("visual_studio_code") end,
+    config = function() vim.cmd.colorscheme("visual_studio_code") end,
   },
   {
     'ellisonleao/gruvbox.nvim',
     lazy = true,
     priority = 100,
-    -- config = function() vim.cmd.colorscheme("gruvbox") end,
+    config = function()
+      require("gruvbox").setup({
+        transparent_mode = true
+      })
+      vim.cmd.colorscheme("gruvbox")
+    end,
   },
   {
     "ricardoraposo/gruvbox-minor.nvim",
-    lazy = true,
+    lazy = false,
     priority = 1000,
     opts = {},
-    -- config = function() vim.cmd.colorscheme("gruvbox-minor") end,
+    config = function() vim.cmd.colorscheme("gruvbox-minor") end,
+  },
+  {
+    'f4z3r/gruvbox-material.nvim',
+    lazy = true,
+    priority = 1000,
+    opts = {
+      contrast = 'hard'
+    },
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function() require("catppuccin").load() end,
   },
@@ -859,9 +890,18 @@ require('lazy').setup {
     lazy = true,
     config = function() require("onenord").load() end,
   },
+  {
+    "rebelot/kanagawa.nvim",
+    opts = {
+      transparent = true
+    },
+    priority = 1000,
+    lazy = true,
+    config = function() require("kanagawa").load() end,
+  }
 }
 
--- Apply automatic indentation in BufRead
+-- Apply automatic indentation after BufRead event
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*',
   callback = function()

@@ -7,14 +7,13 @@
     "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
-        // "custom/days_to_target",
         "clock"
         // "hyprland/window"
     ],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": [
-        "memory",
-        "cpu",
+        // "memory",
+        // "cpu",
         "network",
         "battery",
         "backlight",
@@ -22,11 +21,6 @@
         "pulseaudio#microphone",
         "tray"
     ],
-    "custom/days_to_target": {
-        "exec": "~/.config/waybar/scripts/days_to_target.sh",
-        "interval": 3600,
-        "format": "{}"
-    },
     "hyprland/window": {
         "format": "󰣇 {initialTitle}"
     },
@@ -44,7 +38,7 @@
     },
 
     "clock": {
-        "format": "{:%A    %B-%d-%Y    %I:%M:%S %p}",
+        "format": "{:%A    %B-%d-%Y    %I:%M %p}",
         "interval": 1,
         "rotate": 0,
         "tooltip-format": "<tt>{calendar}</tt>",
