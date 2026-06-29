@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto-switch laptop/monitor display on HDMI hotplug
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/niri-auto-laptop.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target
